@@ -1,3 +1,5 @@
-import chalk from 'chalk';
+import Tara from './Tara.js';
 
-console.log(chalk.red("This is in red!") );
+const p = new Tara("Tara", "#3895d3");
+p.speak();
+
