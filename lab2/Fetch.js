@@ -16,7 +16,7 @@ class Fetch {
             console.log(chalk.hex(pokeColor)("This is a " + pokemon.name + " and its ID is " + pokemon.id));
         })
         .catch(function (error) {
-            console.log(chalk.red("This is an invalid pokemon: " + error));
+            console.log(chalk.red("This is invalid: " + error));
         });
 
     }}
