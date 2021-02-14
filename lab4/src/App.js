@@ -1,9 +1,10 @@
 import React from 'react';
+import Market from './components/Market';
 
-class App extends React.Component {
-  render() {
-    return <p>Hi!</p>
+function App(props) {
+    return (
+      <Market />
+    );
   }
-}
 
 export default App;
