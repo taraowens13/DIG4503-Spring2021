@@ -14,17 +14,17 @@ class Market extends React.Component {
       render () {
         return (
          <div>
-           <h2>Click to add item</h2>
+           <h2>Lab 4: Components and State</h2>
            <button onClick={() => {
-             const items = this.state.items;
-             items.push(<MarketItem/>);
-             this.setState({items: items});
-           }}>Click me!</button>
-           <div>{
-             this.state.items.map(function(item, index) {
-              return <p key={index}>{item}</p>
-             })
-          }</div>
+                const items = this.state.items;
+                items.push(<MarketItem />);
+                this.setState({items: items});
+            }}>Add Item</button>
+            <div>{
+                this.state.items.map(function(count,item) {
+                return <p key={count}><MarketItem/>{item}</p>
+                })
+            }</div>
          </div>
         )
       }
