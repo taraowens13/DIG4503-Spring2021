@@ -1,28 +1,18 @@
-import React from 'react';
+class Pokemon {
+  constructor(pokemon) {
+    this.pokemon = pokemon;
+  }
 
-function Pokemon() {
+passPoke(){
   return (
-    <div className="App">
-      <input type="text" onChange={(event) => {
-        setSearch(event.target.value);
-      }} />
-      <button onClick={() => searchMonsters()}>Search</button>
-      {
-        <p>Searched: {search}</p>
-      }
-      {
-        (loading == true) ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            <h2>{pokemon.name}</h2>
-            <p>{pokemon.id}</p>
-            <img src={pokemon.sprites.front_default} />
-          </div>
-        )
-      }
+    <div>
+      <h1>(this.pokemon.name)</h1>
+        <p>Pokemon ID <b>{this.pokemon.id}</b></p>
+        <img src={this.pokemon.sprites.front_default} />
     </div>
-  );
+  )
 }
 
-export default Pokemon;
+}
+
+export default Pokemon

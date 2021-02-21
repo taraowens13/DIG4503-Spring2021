@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
+import Pokemon from '../Pokemon/index';
 
 function Search() {
 
@@ -9,16 +10,17 @@ function Search() {
 
   const [loading, setLoading] = useState(true);
 
-  function searchMonsters() {
+  function searchPokemon() {
+
     setLoading(true);
 
-    Axios('https://pokeapi.co/api/v2/pokemon/' + search)
+    Axios('https://pokeapi.co/api/v2/pokemon/' + searchpoke)
     .then(function (response) {
         setPokemon(response.data);
         setLoading(false);
     })
     .catch(function (error) {
-        console.log("Error: " + error);
+        return (<div><p>Not found!</p></div>);
     });
   }
 
@@ -27,19 +29,13 @@ function Search() {
       <input type="text" onChange={(event) => {
         setSearch(event.target.value);
       }} />
-      <button onClick={() => searchMonsters()}>Search</button>
+      <button onClick={() => searchPokemon()}>Search Pokemon</button>
       {
-        <p>Searched: {search}</p>
-      }
-      {
+      
         (loading == true) ? (
-          <p>Loading...</p>
+          <h1>Input a Pokemon</h1>
         ) : (
-          <div>
-            <h2>{pokemon.name}</h2>
-            <p>{pokemon.id}</p>
-            <img src={pokemon.sprites.front_default} />
-          </div>
+            poke.passPokemon()
         )
       }
     </div>
