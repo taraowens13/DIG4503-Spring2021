@@ -1,54 +1,48 @@
-import { useState } from 'react';
+import React from 'react';
 import Axios from 'axios';
 
-function App() {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const [search, setSearch] = useState("");
+    this.state = {
+      pokemon: "",
+      loaded: false
+    };
 
-  const [pokemon, setPokemon] = useState({});
+  }
 
-  const [loading, setLoading] = useState(true);
+  componentDidMount() {
+    Axios('https://pokeapi.co/api/v2/pokemon/1')
+    .then((response) => {
+      this.setState(
+        {
+          pokemon: response.data,
+          loaded: true
+        });
+    });
+  }
 
-  function searchMonsters() {
-  
-    setLoading(true);
-
-    Axios('https://pokeapi.co/api/v2/pokemon/ditto' + search)
-      // And then...
-      .then(function (response) {
-        // Save to state
-        setPokemon(response.data);
-
-        setLoading(false);
-      })
-      .catch(function (error) {
-          // handle error
-          console.log("Error: " + error);
-      });
-    }
-
+  render() {
     return (
-      <div className="App">
-        <input type="text" onChange={(event) => {
-          setSearch(event.target.value);
-        }} />
-        <button onClick={() => searchMonsters()}>Search</button>
+      <div>
         {
-          <p>Searched: {search}</p>
-        }
-        {
-          (loading == true) ? (
-            <p>Loading....</p>
-          ) : (
+          this.state.loaded ? 
+          ( 
             <div>
-              <h2>{pokemon.name}</h2>
-              <p>{pokemon.id}</p>
-              <img src={pokemon.sprites.front_default} />
+              <img src={this.state.pokemon.sprites.front_default} />
+              <p>{this.state.pokemon.name}</p>
+              <p>{this.state.pokemon.id}</p>
             </div>
-          )
+          ) :
+          (
+            <p>Loading...</p>
+          )  
         }
       </div>
     );
   }
+
+}
 
 export default App;
