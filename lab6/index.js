@@ -13,7 +13,7 @@ App.get("/", function(req, res) {
     res.send("Hello World!");
 });
 
-App.get("/person2", function(req, res) {
+App.get("/person", function(req, res) {
     res.json(person);
 });
 
