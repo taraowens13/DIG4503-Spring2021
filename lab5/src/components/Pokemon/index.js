@@ -9,6 +9,7 @@ passPoke(){
         <img src={this.pokemon.sprites.front_default} />
         <p>Pokemon name: <b>{this.pokemon.name}</b></p>
         <p>Pokemon ID: <b>{this.pokemon.id}</b></p>
+        <button>Add to Team</button>
     </div>
   )
 }

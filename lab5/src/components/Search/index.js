@@ -30,7 +30,6 @@ function Search() {
   }
 
   const newPokemon = pokemon;
-
   const poke = new Pokemon (newPokemon);
 
   return (
