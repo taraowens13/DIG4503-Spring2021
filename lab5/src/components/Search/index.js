@@ -34,9 +34,7 @@ function Search() {
   const poke = new Pokemon (newPokemon);
 
   return (
-    <div>
-      <input type="text" onChange={(event) => setSearch(event.target.value)} />
-      <button onClick={() => searchPokemon()}>Search Pokemon</button>
+    <div id="poke">
       {
       
         (loading == true) ? (
@@ -49,6 +47,8 @@ function Search() {
             )
         )
       }
+      <input type="text" onChange={(event) => setSearch(event.target.value)} />
+      <button onClick={() => searchPokemon()}>Search Pokemon</button>
     </div>
   );
 }

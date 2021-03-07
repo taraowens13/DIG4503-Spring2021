@@ -6,9 +6,9 @@ class Pokemon {
 passPoke(){
   return (
     <div>
-      <p>Pokemon name: <b>{this.pokemon.name}</b></p>
-        <p>Pokemon ID: <b>{this.pokemon.id}</b></p>
         <img src={this.pokemon.sprites.front_default} />
+        <p>Pokemon name: <b>{this.pokemon.name}</b></p>
+        <p>Pokemon ID: <b>{this.pokemon.id}</b></p>
     </div>
   )
 }
