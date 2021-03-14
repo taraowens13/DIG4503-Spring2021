@@ -3,15 +3,49 @@ import Express from 'express'
 const App = Express();
 const port = 45030;
 
-const arrayExample = [
-    "Hello!",
-    "Hey!",
-    "Howdy!"
+const names = [
+    'Cortney',
+    'Dewayne',
+    'Trenton',
+    'Pamala',
+    'Ettie',
+    'Errol',
+    'Lorrie',
+    'Hang',
+    'Lauryn',
+    'Caterina',
+    'Isa',
+    'Marcela'
 ];
 
-App.get("/collection/:resource", (req, res) => {
+App.get("/people/:person", (req, res) => {
 
-    let result = "Not found!";
+    let result = {name: "not found"};
+
+    names.forEach((value) => {
+        if(value == req.params.person) {
+            result = {name: value};
+        }
+    });
+
+    res.json(result);
+});
+
+App.get("/search/:name", (req, res) => {
+
+    let result = {names: "not found"};
+
+    let arrayResult = [];
+
+    names.forEach((value) => {
+       if(value.includes(req.params.name)) {
+            arrayResult.push(value);
+       }
+    });
+
+    if(arrayResult.length > 0) {
+        result = {names: arrayResult};
+    }
 
     res.json(result);
 });
