@@ -36,8 +36,8 @@ function App() {
       <input type="text" onChange={(event) => setSearchName(event.target.value)} />
       <button onClick ={() => getNames(searchName)}>Click me to test get!</button>
       {
-        searchResults.map(value => {
-          return <p>{value}</p>
+        searchResults.map((value, index) => {
+          return <p key={index}>{value}</p>
         })
       }
     </div>
@@ -45,3 +45,4 @@ function App() {
 }
 
 export default App;
+
