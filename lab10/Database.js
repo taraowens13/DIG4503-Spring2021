@@ -1,6 +1,6 @@
 import MongoClient from 'mongodb';
 
-const url = ""
+const URL = "mongodb+srv://TaraOwens:O8X7O6lW9ftvZ3Rs@cluster0.yuzwq.mongodb.net";
 
 export default class Database {
     constructor(){
@@ -11,18 +11,22 @@ export default class Database {
 
     async connect() {
         this.connection = await MongoClient.connect(url, { useUnifiedTopology: true });
-        this.database = this.connection.db("<Database>");
-        this.collection = this.database.collection("<Collection>");
+        this.database = this.connection.db("lab10");
+        this.collection = this.database.collection("people");
 }
 
-    async createOne(person) {
+    async createOne(newPerson) {
         if(this.collection != null) {
-            return await this.collection.insertOne(person);
+            return await this.collection.insertOne(newPerson);
         }
     }
 
-    readOne(person){
-        collection.find({"person": "not found"}).limit(100)
+    async readOne(person){
+        if (this.collection != null) {
+            this.collection.findOne({
+                firstName: person,
+            });
+        }
     }
 
     close() {
