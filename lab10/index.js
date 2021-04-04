@@ -11,24 +11,18 @@ d.connect();
 App.use(Express.json());
 
 App.put("/people/create", (req, res) => {
-    let sendData = {
-        firstName: req.body.firstName,
-        LastName: req.body.LastName,
-        favoriteColor: req.body.favoriteColor,
-        };
+    let firstName = req.body.firstName;
+    let lastName = req.body.LastName;
+    let favColor = req.body.favoriteColor;
         
-    d.createOne(sendData);
+    d.createOne(firstName, lastName, favColor).then((response) => res.json(response));
 
-    res.json(sendData);
-    console.log(passData);
 });
 
 App.get("/people/:person", (req, res) => {
-    let person = req.params.person;
+    let search = req.params.person;
 
-    d.readOne(person);
-    
-    res.json(result);
+    d.readOne(search).then((response) => res.json(response));
 });
 
 App.listen(port, () => {

@@ -15,17 +15,29 @@ export default class Database {
         this.collection = this.database.collection("people");
 }
 
-    async createOne(newPerson) {
+    async createOne(firstName, lastName, favColor) {
         if(this.collection != null) {
-            return await this.collection.insertOne(newPerson);
+            let addData = {
+                firstName: firstName,
+                lastName: lastName,
+                favoriteColor: favColor,
+            };
+            await this.collection.insertOne(addData);
+
+            return addData;
         }
     }
 
     async readOne(person){
         if (this.collection != null) {
-            this.collection.findOne({
+            let findData = { search: "not found" };
+            let results = await this.collection.findOne({
                 firstName: person,
             });
+            if (results != null){
+                findData = results;
+            }
+            return findData;
         }
     }
 
