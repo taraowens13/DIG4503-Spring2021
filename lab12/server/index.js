@@ -7,7 +7,7 @@ const port = 45030;
 App.use(Express.json());
 
 const db = new Database();
-db.connect("lab11", "TaraOwens");
+db.connect("lab12", "TaraOwens");
 
 App.put("/books/:ISBN", (req, res) => {
     const ISBN = req.params.ISBN;
