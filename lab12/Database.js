@@ -49,30 +49,6 @@ close() {
         }
     }
 
-    async readMany(){
-        if (this.collection != null) {
-            let findBooks = { search: "not found" };
-            let results = await this.collection.findMany({
-                title: title,
-                author: author,
-                description: description
-            });
-            if (results != null){
-                findBooks = results;
-            }
-            return findBooks;
-        }
-    }
-
-    async updateOne(ISBN, title, author, description){
-        if(this.collection != null) {
-            const result = await this.collection.updateOne({"ISBN": ISBN}, {$set: {"title": title, "author": author, "description": description}});
-            return {"title": title, "author": author, "description": description};
-        } else {
-            return "could not be updated";
-        }
-    }
-
     async deleteOne(ISBN){
         if(this.collection != null) {
             const result = await this.collection.deleteOne({"ISBN": ISBN});

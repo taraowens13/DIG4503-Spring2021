@@ -1,14 +1,17 @@
 import Express from 'express';
-import Database from 'Database.js'
+import CORS from 'cors';
+import Database from '../Database';
 
 const App = Express();
 const port = 45030;
 
+App.use(CORS());
 App.use(Express.json());
 
 const db = new Database();
-db.connect("lab12", "TaraOwens");
+db.connect("lab11", "TaraOwens");
 
+// PUT
 App.put("/books/:ISBN", (req, res) => {
     const ISBN = req.params.ISBN;
 
@@ -21,6 +24,7 @@ App.put("/books/:ISBN", (req, res) => {
     res.json(result);
 });
 
+// GET
 App.get("/books/:ISBN", (req, res) => {
     const ISBN = req.params.ISBN;
 
@@ -30,25 +34,7 @@ App.get("/books/:ISBN", (req, res) => {
     res.json(result);
 });
 
-App.post("/books/search", (req, res) => {
-    const ISBN = req.params.ISBN;
-    res.json({
-        URLParameters: req.query
-    })
-});
-
-App.patch("/books/:ISBN", (req, res) => {
-    const ISBN = req.params.ISBN;
-    
-    const title = req.body.title;
-    const author = req.body.author;
-    const description = req.body.description;
-
-    const result = await db.updateOne(ISBN, title, author, description);
-
-    res.json(result);
-});
-
+// DELETE
 App.delete("/books/:ISBN", (req, res) => {
     const ISBN = req.params.ISBN;
 
@@ -57,4 +43,6 @@ App.delete("/books/:ISBN", (req, res) => {
     res.json(result);
 });
 
-App.listen(port);
+App.listen(port, () =>{
+    console.log("Server is running!");
+});
