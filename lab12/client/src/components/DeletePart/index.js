@@ -3,9 +3,10 @@ import Axios from 'axios';
 function DeletePart() {
 
     const dltPart = async () => {
-        const response = await Axios.delete("http://localhost:45030/books/999", {
-            title: "Test",
-            description: "Some words"
+        const response = await Axios.delete("http://localhost:45030/books/9780375508325", {
+            title: "Cosmos",
+            author: "Carl Sagan",
+            description: "explore the mutual development of science and civilization"
         });
         console.log(response.data);
     };
