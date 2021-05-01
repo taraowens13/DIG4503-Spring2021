@@ -1,9 +1,17 @@
-import Express from 'express';
-import CORS from 'cors';
+import Database from './Database.js';
 
-const App = Exress();
-const port = 45030;
+const db = new Database();
 
-App.use(CORS());
-App.use(Express.json());
+async function dbFunctionality() {
+    await db.connect("portfolio2", "TaraOwens");
+    await db.create({exampleField: "A value!"});
+    //await db.create({exampleField: "A value!"});
+    //await db.create({exampleField: "A value!"});
+    //await db.readMany({exampleField: "A value!"});
+    //await db.update({exampleField: "A value!"}, {exampleField: "Another!"});
+    await db.delete({exampleField: "A value!"});
+    db.close();
+}
+
+dbFunctionality();
 
