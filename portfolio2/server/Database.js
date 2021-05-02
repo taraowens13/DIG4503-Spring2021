@@ -9,10 +9,10 @@ export default class Database {
         this.collection = null;
     }
 
-    async connect(database,collection) {
+    async connect() {
         this.connection = await MongoClient.connect(URL);
-        this.database = this.connection.db(database);
-        this.collection = this.database.collection(collection);
+        this.database = this.connection.db("portfolio2");
+        this.collection = this.database.collection("TaraOwens");
     }
 
     close() {
@@ -21,53 +21,60 @@ export default class Database {
         }
     }
 
-    async create(document) {
-        let createdResult = null;
-
+    async createOne(title, year, runtime) {
         if(this.collection != null) {
-            createdResult = await this.collection.insertOne(document);
-        }
+            let addData = {
+                title: title,
+                year: year,
+                runtime: runtime,
+            };
+            await this.collection.insertOne(addData);
 
-        return createdResult;
+            return addData;
+        }
     }
 
-    async readOne(query) {
-        let foundDocument = null;
-
-        if(this.collection != null){
-            foundDocument = await this.collection.findOne(query);
+    async readOne(title){
+        if (this.collection != null) {
+            let findData = { search: "not found" };
+            let results = await this.collection.findOne({
+                title: title,
+            });
+            if (results != null){
+                findData = results;
+            }
+            return findData;
         }
-
-        return foundDocument;
     }
 
-    async readMany(query) {
-        let foundDocuments = null;
+    async readMany(title) {
+        if (this.collection != null) {
+            let findMovie = { search: "not found" };
+            let results = await this.collection.findMany({
+                title: title
+            });
+            if (results != null){
+                findMovie = results;
+            }
+            return findMovie;
+        }
+    }
 
+    async updateOne(id, title, year, runtime) {
         if(this.collection != null) {
-            foundDocuments = await this.collection.find(query).toArray();
+            const result = await this.collection.updateOne({"id": id}, {$set: {"title": title, "year": year, "runtime": runtime}});
+            return {"title": title, "year": year, "runtime": runtime};
+        } else {
+            return "could not be updated";
         }
-
-        return foundDocuments;
     }
 
-    async update(query, update) {
-        let updatedResult = null;
-
-        if(this.collection != null){
-            updatedResult = await this.collection.updateMany(query, {$set:update});
-        }
-
-        return updatedResult;
-    }
-
-    async delete(query) {
-        let deletedResult = null;
-
+    async deleteOne(id) {
         if(this.collection != null) {
-            deletedResult = await this.collection.deleteMany(query);
+            const result = await this.collection.deleteOne({"id": id});
+            return {"deleted": result.deletedCount};
+        } else {
+            return {"deleted": 0};
         }
-
-        return deletedResult;
     }
 }
