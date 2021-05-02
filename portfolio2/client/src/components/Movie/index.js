@@ -2,7 +2,7 @@ import React from 'react';
 import AddMovie from '../Add';
 import DeleteMovie from '../Delete';
 
-const Movie = ({ title, img, details}) => (
+const Movie = () => (
     <div className="card">
         <img></img>
         <div className="container">
